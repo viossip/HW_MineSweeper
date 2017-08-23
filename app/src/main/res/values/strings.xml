@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">HW_MineSweeper</string>
     <string name="title">Wellcome!</string>
+    <string name="help_activity_title">Help</string>
+    <string name="help_activity_text1">Use the button below the game board to switch
+        between the Mine to reveal tiles,
+        and the Flag to flag suspected tiles.</string>
 </resources>
