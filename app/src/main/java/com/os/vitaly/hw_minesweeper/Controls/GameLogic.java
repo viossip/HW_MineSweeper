@@ -5,7 +5,7 @@ package com.os.vitaly.hw_minesweeper.Controls;
  */
 
 public class GameLogic {
-    public static int[][] generate( int bombnumber , final int width , final int height){
+    public static int[][] generaterator( int bombnumber , final int width , final int height){
         // Random for generating numbers
         Random r = new Random();
 
