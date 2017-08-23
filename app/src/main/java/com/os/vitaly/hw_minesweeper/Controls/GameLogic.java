@@ -5,7 +5,7 @@ package com.os.vitaly.hw_minesweeper.Controls;
  */
 
 public class GameLogic {
-    public static int[][] generaterator( int bombnumber , final int width , final int height){
+    public static int[][] generaterator( int bomb , final int width , final int height){
         // Random for generating numbers
         Random r = new Random();
 
@@ -14,14 +14,14 @@ public class GameLogic {
             grid[x] = new int[height];
         }
 
-        while( bombnumber > 0 ){
+        while( bomb > 0 ){
             int x = r.nextInt(width);
             int y = r.nextInt(height);
 
             // -1 is the bomb
             if( grid[x][y] != -1 ){
                 grid[x][y] = -1;
-                bombnumber--;
+                bomb--;
             }
         }
         grid = calculateNeigbours(grid,width,height);
@@ -46,19 +46,19 @@ public class GameLogic {
 
         int count = 0;
 
-        if( isMineAt(grid,x - 1 ,y + 1,width,height)) count++; // top-left
-        if( isMineAt(grid,x     ,y + 1,width,height)) count++; // top
-        if( isMineAt(grid,x + 1 ,y + 1,width,height)) count++; // top-right
-        if( isMineAt(grid,x - 1 ,y    ,width,height)) count++; // left
-        if( isMineAt(grid,x + 1 ,y    ,width,height)) count++; // right
-        if( isMineAt(grid,x - 1 ,y - 1,width,height)) count++; // bottom-left
-        if( isMineAt(grid,x     ,y - 1,width,height)) count++; // bottom
-        if( isMineAt(grid,x + 1 ,y - 1,width,height)) count++; // bottom-right
+        if( mineAt(grid,x - 1 ,y + 1,width,height)) count++; // top-left
+        if( mineAt(grid,x     ,y + 1,width,height)) count++; // top
+        if( mineAt(grid,x + 1 ,y + 1,width,height)) count++; // top-right
+        if( mineAt(grid,x - 1 ,y    ,width,height)) count++; // left
+        if( mineAt(grid,x + 1 ,y    ,width,height)) count++; // right
+        if( mineAt(grid,x - 1 ,y - 1,width,height)) count++; // bottom-left
+        if( mineAt(grid,x     ,y - 1,width,height)) count++; // bottom
+        if( mineAt(grid,x + 1 ,y - 1,width,height)) count++; // bottom-right
 
         return count;
     }
 
-    private static boolean isMineAt( final int [][] grid, final int x , final int y , final int width , final int height){
+    private static boolean mineAt( final int [][] grid, final int x , final int y , final int width , final int height){
         if( x >= 0 && y >= 0 && x < width && y < height ){
             if( grid[x][y] == -1 ){
                 return true;
