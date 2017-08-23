@@ -1,5 +1,7 @@
 package com.os.vitaly.hw_minesweeper.Controls;
 
+import java.util.Random;
+
 /**
  * Created by Vitaly on 12.08.2017.
  */
