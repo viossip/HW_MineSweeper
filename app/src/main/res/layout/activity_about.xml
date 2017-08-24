@@ -18,61 +18,44 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:text="@string/help_activity_title"
+        android:text="@string/about_activity_title"
         android:textColor="@android:color/black"
         android:textSize="20pt"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
+
 
         <TextView
-            android:id="@+id/about_text"
+            android:id="@+id/title_about_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:gravity="center_horizontal"
-
-            android:text="@string/help_activity_text1"
+            android:text="@string/about_activity_text1"
             android:textSize="10pt" />
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/logo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/logo" />
 
-            <ImageView
-                android:id="@+id/mine_image_view"
-                android:layout_width="200px"
-                android:layout_height="200px"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/mine" />
-
-            <ImageView
-                android:id="@+id/flag_image_view"
-                android:layout_width="200px"
-                android:layout_height="200px"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="0.05"
-                android:src="@drawable/flag" />
-        </LinearLayout>
 
         <ImageButton
-            android:id="@+id/buttonHelpBack"
-            android:layout_gravity="center_horizontal"
+            android:id="@+id/buttonAboutBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="30dp"
             android:adjustViewBounds="true"
@@ -81,7 +64,6 @@
             android:src="@drawable/button_back" />
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

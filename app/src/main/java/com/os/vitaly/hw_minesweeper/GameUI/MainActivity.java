@@ -1,13 +1,12 @@
 package com.os.vitaly.hw_minesweeper.GameUI;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.Window;
 import android.widget.ImageButton;
 
 import com.os.vitaly.hw_minesweeper.R;
@@ -15,23 +14,18 @@ import com.os.vitaly.hw_minesweeper.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChooseLvlActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
-    //ImageButton easyBtn, mediumBtn, hardBtn, backBtn;
-    private List<ImageButton> buttonsInActivity;
+    private Intent intent;
     private myClickListener listener;
-
-    public enum Level {
-        Easy("Easy"), Medium("Medium"), Hard("Hard");
-        private String value;
-        Level(String value) { this.value = value; }
-        public String getValue() { return value; }
-    }
+    private List<ImageButton> buttonsInActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_lvl);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         listener = new myClickListener();
         buttonsInActivity = new ArrayList();
@@ -59,20 +53,28 @@ public class ChooseLvlActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             ImageButton thisButton = (ImageButton) v;
-
             thisButton.setScaleType(ImageButton.ScaleType.FIT_CENTER);
             thisButton.setPadding(20, 20, 20, 20);
 
-            if(v.getId() != R.id.buttonBack){
-                Intent intent = new Intent(ChooseLvlActivity.this, GameActivity.class);
-                Bundle bundle = new Bundle();
-
-                bundle.putInt("level", (Level.valueOf(thisButton.getTag().toString())).ordinal());
-                intent.putExtras(bundle);
-                startActivity(intent);
+            switch (v.getId()){
+                case R.id.buttonHelp:
+                    intent = new Intent( MainActivity.this, HelpActivity.class);
+                    break;
+                case R.id.buttonStartGame:
+                    intent = new Intent( MainActivity.this, ChooseLvlActivity.class);
+                    break;
+                case R.id.buttonAbout:
+                    intent = new Intent( MainActivity.this, AboutActivity.class);
+                    break;
+                case R.id.buttonRecords:
+                    intent = new Intent( MainActivity.this, HighscoresActivity.class);
+                    break;
+                case R.id.buttonExit:
+                    finish();
+                    System.exit(0);
+                    break;
             }
-            else
-                finish();
+            MainActivity.this.startActivity(intent);
         }
     }
 }

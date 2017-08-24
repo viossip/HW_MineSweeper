@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GameUI.MainGameActivity">
+        <activity android:name=".GameUI.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,7 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".GameUI.ChooseLvlActivity" />
-        <activity android:name=".GameUI.HelpActivity"></activity>
+        <activity android:name=".GameUI.HelpActivity" />
+        <activity android:name=".GameUI.GameActivity" />
+        <activity android:name=".GameUI.AboutActivity" />
+        <activity android:name=".GameUI.HighscoresActivity"></activity>
     </application>
 
 </manifest>
