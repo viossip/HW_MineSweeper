@@ -15,6 +15,7 @@ import com.os.vitaly.hw_minesweeper.Entities.Cell;
  * Created by ilya on 23/08/2017.
  */
 public class GameRunner {
+    
     public static int HEIGHT;
     public static int WIDTH;
     public static int Bomb_Number;
@@ -33,7 +34,8 @@ public class GameRunner {
     public GameRunner() {
     }
 
-    public GameRunner(int bomb_Number, int HEIGHT, int WIDTH) {
+    public GameRunner() {
+        if
         this.Bomb_Number = bomb_Number;
         this.HEIGHT = HEIGHT;
         this.WIDTH = WIDTH;
