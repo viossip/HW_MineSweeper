@@ -6,10 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.os.vitaly.hw_minesweeper.Controls.GameRunner;
+import com.os.vitaly.hw_minesweeper.Entities.GridBoard;
 import com.os.vitaly.hw_minesweeper.R;
 
 public class GameActivity extends AppCompatActivity {
-
     ChooseLvlActivity.Level lvl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +19,9 @@ public class GameActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         lvl = ChooseLvlActivity.Level.values()[bundle.getInt("level")] ;
+
+        GridBoard gb = (GridBoard)findViewById(R.id.gridBoard );
+        gb.sttLevel(lvl);
 
         ImageButton btnExit = (ImageButton) findViewById(R.id.btnExitGame);
         btnExit.setOnClickListener(new View.OnClickListener() {
@@ -36,8 +40,12 @@ public class GameActivity extends AppCompatActivity {
                 restart();
             }
         });
-    }
 
+        GameRunner.getInstance(lvl).createGrid(this);
+    }
+    public ChooseLvlActivity.Level getLevel(){
+        return lvl;
+    }
     private void restart() {
         this.recreate();
     }
