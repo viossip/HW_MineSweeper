@@ -19,7 +19,7 @@ public class GameRunner {
 
     public static GameRunner getInstance() {
         if( instance == null ){
-            instance = new GameEngine();
+            instance = new GameRunner ();
         }
         return instance;
     }
@@ -27,13 +27,13 @@ public class GameRunner {
     private GameRunner(){ }
 
     public void createGrid(Context context){
-        Log.e("GameEngine","createGrid is working");
         this.context = context;
 
         // create the grid and store it
-        int[][] GeneratedGrid = Generator.generate(BOMB_NUMBER,WIDTH, HEIGHT);
+        int[][] GeneratedGrid = GameLogic.generator(BOMB_NUMBER,WIDTH, HEIGHT);
         PrintGrid.print(GeneratedGrid,WIDTH,HEIGHT);
         setGrid(context,GeneratedGrid);
+
     }
 
     }

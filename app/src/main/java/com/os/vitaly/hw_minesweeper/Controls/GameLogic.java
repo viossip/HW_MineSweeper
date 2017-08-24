@@ -7,7 +7,7 @@ import java.util.Random;
  */
 
 public class GameLogic {
-    public static int[][] generaterator( int bomb , final int width , final int height){
+    public static int[][] generator( int bomb , final int width , final int height){
         // Random for generating numbers
         Random r = new Random();
 
