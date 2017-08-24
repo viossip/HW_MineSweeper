@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.os.vitaly.hw_minesweeper.Entities.Cell;
+import com.os.vitaly.hw_minesweeper.GameUI.ChooseLvlActivity;
 
 //import com.example.ilyavitaly.minesweeper.UI.Cell;
 
@@ -15,7 +16,7 @@ import com.os.vitaly.hw_minesweeper.Entities.Cell;
  * Created by ilya on 23/08/2017.
  */
 public class GameRunner {
-    
+    String level;
     public static int HEIGHT;
     public static int WIDTH;
     public static int Bomb_Number;
@@ -24,22 +25,33 @@ public class GameRunner {
 
     private Cell[][] Minesweepers;
 
-    public static GameRunner getInstance() {
+    public static GameRunner getInstance(ChooseLvlActivity.Level lvl) {
         if (instance == null) {
-            instance = new GameRunner(Bomb_Number, HEIGHT, WIDTH);
+
+            instance = new GameRunner(lvl.getValue());
         }
         return instance;
     }
 
-    public GameRunner() {
+    public GameRunner(String value) {
+        if (value.equals("Easy")){
+            this.HEIGHT=10;
+            this.WIDTH=10;
+            this.Bomb_Number=5;
+        }
+        if (value.equals("Medium")) {
+            this.HEIGHT=10;
+            this.WIDTH=10;
+            this.Bomb_Number=10;
+        }
+        if (value.equals("Hard")) {
+            this.HEIGHT=10;
+            this.WIDTH=10;
+            this.Bomb_Number=10;
+        }
     }
 
-    public GameRunner() {
-        if
-        this.Bomb_Number = bomb_Number;
-        this.HEIGHT = HEIGHT;
-        this.WIDTH = WIDTH;
-    }
+
 
     public void createGrid(Context context) {
         this.context = context;

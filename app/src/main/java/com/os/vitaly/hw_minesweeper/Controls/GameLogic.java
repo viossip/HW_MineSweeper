@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class GameLogic {
     public static int[][] generator( int bomb , final int width , final int height){
-        // Random for generating numbers
+
         Random r = new Random();
 
         int [][] grid = new int[width][height];

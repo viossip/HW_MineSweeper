@@ -32,12 +32,12 @@ public class Cell extends BaseCell implements View.OnClickListener , View.OnLong
 
     @Override
     public void onClick(View v) {
-        GameRunner.getInstance().click( getXPos(), getYPos() );
+        GameRunner.getInstance(lvl).click( getXPos(), getYPos() );
     }
 
     @Override
     public boolean onLongClick(View v) {
-        GameRunner.getInstance().flag( getXPos() , getYPos() );
+        GameRunner.getInstance(lvl).flag( getXPos() , getYPos() );
 
         return true;
     }
