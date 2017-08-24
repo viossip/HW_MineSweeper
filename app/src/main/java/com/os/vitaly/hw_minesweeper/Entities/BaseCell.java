@@ -3,6 +3,8 @@ package com.os.vitaly.hw_minesweeper.Entities;
 import android.content.Context;
 import android.view.View;
 
+import com.os.vitaly.hw_minesweeper.Controls.GameRunner;
+
 /**
  * Created by Vitaly on 24.08.2017.
  */

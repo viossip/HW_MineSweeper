@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 
+import com.os.vitaly.hw_minesweeper.Controls.GameRunner;
+
 /**
  * Created by ilya on 24/08/2017.
  */
@@ -16,7 +18,7 @@ public class GridBoard extends GridView {
     public GridBoard(Context context , AttributeSet attrs){
         super(context,attrs);
 
-        GameEngine.getInstance().createGrid(context);
+        GameRunner.getInstance().createGrid(context);
 
         setNumColumns(GameRunner.WIDTH);
         setAdapter(new GridAdapter());

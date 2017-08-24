@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 
+import com.os.vitaly.hw_minesweeper.Controls.GameRunner;
 import com.os.vitaly.hw_minesweeper.R;
 
 /**
