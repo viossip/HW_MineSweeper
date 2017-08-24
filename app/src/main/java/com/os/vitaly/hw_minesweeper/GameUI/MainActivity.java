@@ -10,21 +10,21 @@ import android.widget.ImageButton;
 
 import com.os.vitaly.hw_minesweeper.R;
 
-public class MainGameActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main_game);
+        setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         ImageButton btnStart = (ImageButton) findViewById(R.id.buttonStartGame);
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainGameActivity.this, ChooseLvlActivity.class);
-                MainGameActivity.this.startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, ChooseLvlActivity.class);
+                MainActivity.this.startActivity(intent);
             }
         });
 
@@ -32,8 +32,8 @@ public class MainGameActivity extends AppCompatActivity {
         btnHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainGameActivity.this, HelpActivity.class);
-                MainGameActivity.this.startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, HelpActivity.class);
+                MainActivity.this.startActivity(intent);
             }
         });
     }

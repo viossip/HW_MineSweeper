@@ -5,4 +5,8 @@
     <string name="help_activity_text1">Use the button below the game board to switch
         between the Mine to reveal tiles,
         and the Flag to flag suspected tiles.</string>
+    <string name="chooseLvl">Choose choose difficulty level:</string>
+    <string name="lbl_time">Time:</string>
+    <string name="timer_value">00:00</string>
+    <string name="lbl_mines">Mines:</string>
 </resources>

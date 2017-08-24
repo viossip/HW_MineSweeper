@@ -1,7 +1,8 @@
-package com.example.ilyavitaly.minesweeper;
+/*package com.example.ilyavitaly.minesweeper;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,7 +11,7 @@ import com.example.ilyavitaly.minesweeper.UI.Cell;
 
 /**
  * Created by ilya on 23/08/2017.
- */
+
 public class GameRunner {
 
     private static GameRunner instance;
@@ -19,7 +20,7 @@ public class GameRunner {
 
     public static GameRunner getInstance() {
         if( instance == null ){
-            instance = new GameEngine();
+            instance = new GameRunner();
         }
         return instance;
     }
@@ -36,5 +37,5 @@ public class GameRunner {
         setGrid(context,GeneratedGrid);
     }
 
-    }
+    }*/
 
