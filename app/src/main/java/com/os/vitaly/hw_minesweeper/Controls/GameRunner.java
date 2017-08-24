@@ -1,4 +1,4 @@
-package com.example.ilyavitaly.minesweeper;
+package com.os.vitaly.hw_minesweeper.Controls;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.example.ilyavitaly.minesweeper.UI.Cell;
+//import com.example.ilyavitaly.minesweeper.UI.Cell;
 
 /**
  * Created by ilya on 23/08/2017.
