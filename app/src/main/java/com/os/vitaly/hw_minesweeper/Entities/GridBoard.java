@@ -49,7 +49,7 @@ public class GridBoard extends GridView {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            return GameRunner.getInstance().getCellAt(position);
+            return GameRunner.getInstance().getCellAt(position,-1,-1,true);
         }
     }
 }

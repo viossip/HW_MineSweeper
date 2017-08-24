@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import com.os.vitaly.hw_minesweeper.Entities.Cell;
 
@@ -20,34 +21,37 @@ public class GameRunner {
     private static GameRunner instance;
     private Context context;
 
-    private Cell[][] Minesweepers ;
+    private Cell[][] Minesweepers;
 
     public static GameRunner getInstance() {
-        if( instance == null ){
-            instance = new GameRunner (Bomb_Number,HEIGHT,WIDTH);
+        if (instance == null) {
+            instance = new GameRunner(Bomb_Number, HEIGHT, WIDTH);
         }
         return instance;
     }
-    public GameRunner(){}
 
-    public GameRunner(int bomb_Number,int HEIGHT,int WIDTH ) {
-        this.Bomb_Number=bomb_Number;
-        this.HEIGHT=HEIGHT;
-        this.WIDTH=WIDTH;
+    public GameRunner() {
     }
 
-    public void createGrid(Context context){
+    public GameRunner(int bomb_Number, int HEIGHT, int WIDTH) {
+        this.Bomb_Number = bomb_Number;
+        this.HEIGHT = HEIGHT;
+        this.WIDTH = WIDTH;
+    }
+
+    public void createGrid(Context context) {
         this.context = context;
 
         // create the grid and store it
-        int[][] GeneratedGrid = GameLogic.generator(Bomb_Number,WIDTH, HEIGHT);
-        PrintGrid.print(GeneratedGrid,WIDTH,HEIGHT);
-        setGrid(context,GeneratedGrid);
+        int[][] GeneratedGrid = GameLogic.generator(Bomb_Number, WIDTH, HEIGHT);
+        PrintGrid.print(GeneratedGrid, WIDTH, HEIGHT);
+        setGrid(context, GeneratedGrid);
 
     }
-    private void setGrid( final Context context, final int[][] grid ){
-        Minesweepers=new Cell[WIDTH][HEIGHT];
-        for( int x = 0 ; x < WIDTH ; x++ )
+
+    private void setGrid(final Context context, final int[][] grid) {
+        Minesweepers = new Cell[WIDTH][HEIGHT];
+        for (int x = 0; x < WIDTH; x++)
             for (int y = 0; y < HEIGHT; y++) {
                 if (Minesweepers[x][y] == null) {
                     Minesweepers[x][y] = new Cell(context, x, y);
@@ -56,7 +60,8 @@ public class GameRunner {
                 Minesweepers[x][y].invalidate();
             }
     }
-    public Cell getCellAt(int position,int x,int y,boolean ByPosition) {
+
+    public Cell getCellAt(int position, int x, int y, boolean ByPosition) {
         if (ByPosition) {
             int PosX = position % WIDTH;
             int PosY = position / WIDTH;
@@ -65,21 +70,21 @@ public class GameRunner {
         return Minesweepers[x][y];
     }
 
-    public void click( int x , int y ){
-        if( x >= 0 && y >= 0 && x < WIDTH && y < HEIGHT && !getCellAt(-1,x,y,false).isClicked() ){
-            getCellAt(-1,x,y,false).setClicked();
+    public void click(int x, int y) {
+        if (x >= 0 && y >= 0 && x < WIDTH && y < HEIGHT && !getCellAt(-1, x, y, false).isClicked()) {
+            getCellAt(-1, x, y, false).setClicked();
 
-            if( getCellAt(-1,x,y,false).getValue() == 0 ){
-                for( int xt = -1 ; xt <= 1 ; xt++ ){
-                    for( int yt = -1 ; yt <= 1 ; yt++){
-                        if( xt != yt ){
-                            click(x + xt , y + yt);
+            if (getCellAt(-1, x, y, false).getValue() == 0) {
+                for (int xt = -1; xt <= 1; xt++) {
+                    for (int yt = -1; yt <= 1; yt++) {
+                        if (xt != yt) {
+                            click(x + xt, y + yt);
                         }
                     }
                 }
             }
 
-            if( getCellAt(-1,x,y,false).isBomb() ){
+            if (getCellAt(-1, x, y, false).isBomb()) {
                 onGameLost();
             }
         }
@@ -87,10 +92,41 @@ public class GameRunner {
         checkEnd();
     }
 
-    private void onGameLost() {
-    }
-    private void checkEnd(){
+    private boolean checkEnd() {
+        int bombNotFound = Bomb_Number;
+        int notRevealed = WIDTH * HEIGHT;
+        for (int x = 0; x < WIDTH; x++) {
+            for (int y = 0; y < HEIGHT; y++) {
+                if (getCellAt(-1,x, y,false).isRevealed() || getCellAt(-1,x, y,false).isFlagged()) {
+                    notRevealed--;
+                }
 
+                if (getCellAt(-1,x, y,false).isFlagged() && getCellAt(-1,x, y,false).isBomb()) {
+                    bombNotFound--;
+                }
+            }
+        }
+
+        if (bombNotFound == 0 && notRevealed == 0) {
+            Toast.makeText(context, "Game won", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
+
+    public void flag(int x, int y) {
+        boolean isFlagged = getCellAt(-1,x, y,false).isFlagged();
+        getCellAt(-1,x, y,false).setFlagged(!isFlagged);
+        getCellAt(-1,x, y,false).invalidate();
+    }
+
+    private void onGameLost() {
+        // handle lost game
+        Toast.makeText(context, "Game lost", Toast.LENGTH_SHORT).show();
+
+        for (int x = 0; x < WIDTH; x++) {
+            for (int y = 0; y < HEIGHT; y++) {
+                getCellAt(-1,x, y,false).setRevealed();
+            }
+        }
     }
 }
-
