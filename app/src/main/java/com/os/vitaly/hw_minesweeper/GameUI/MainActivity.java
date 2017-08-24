@@ -1,6 +1,5 @@
 package com.os.vitaly.hw_minesweeper.GameUI;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent( MainActivity.this, AboutActivity.class);
                     break;
                 case R.id.buttonRecords:
-                    intent = new Intent( MainActivity.this, RecordsActivity.class);
+                    intent = new Intent( MainActivity.this, HighscoresActivity.class);
                     break;
                 case R.id.buttonExit:
                     finish();

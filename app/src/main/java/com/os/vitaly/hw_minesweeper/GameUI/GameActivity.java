@@ -15,13 +15,26 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-/*        ImageButton btnStart = (ImageButton) findViewById(R.id.buttonStartGame);
-        btnStart.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnExit = (ImageButton) findViewById(R.id.btnExitGame);
+        btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GameActivity.this, MainActivity.class);
                 GameActivity.this.startActivity(intent);
+                finish();
             }
-        });*/
+        });
+
+        ImageButton btnStartNewGame = (ImageButton) findViewById(R.id.btnStartNewGame);
+        btnStartNewGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restart();
+            }
+        });
+    }
+
+    private void restart() {
+        this.recreate();
     }
 }

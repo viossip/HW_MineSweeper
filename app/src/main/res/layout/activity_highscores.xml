@@ -48,17 +48,17 @@
         android:padding="0px">
 
         <ImageButton
-            android:id="@+id/btnExitGame"
+            android:id="@+id/btnTable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_horizontal_margin"
             android:padding="0dp"
             android:paddingHorizontal="10px"
             android:scaleType="fitCenter"
-            android:src="@drawable/button_exit_game" />
+            android:src="@drawable/button_table" />
 
         <ImageButton
-            android:id="@+id/btnStartNewGame"
+            android:id="@+id/btnMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_horizontal_margin"
@@ -67,74 +67,24 @@
             android:padding="0dp"
             android:paddingHorizontal="10px"
             android:scaleType="fitCenter"
-            android:src="@drawable/button_new_game" />
+            android:src="@drawable/button_map" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:padding="0px">
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="5dp"
->
-
-            <TextView
-                android:id="@+id/mines_left_text_view1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/lbl_mines"
-                android:textColor="@android:color/black"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/mines_left_text_view2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:textColor="@android:color/black"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
-            <TextView
-                android:id="@+id/lbl_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/lbl_time"
-                android:textColor="@android:color/black"
-                android:textSize="28sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/time_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="@string/timer_value"
-                android:textColor="@android:color/black"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-    </LinearLayout>
+        android:stretchColumns="1">
+    </TableLayout>
 
     <ImageButton
-        android:id="@+id/selection_button"
+        android:id="@+id/btnReturn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
-
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:padding="0dp"
+        android:paddingHorizontal="10px"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_return" />
 </LinearLayout>

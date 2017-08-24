@@ -20,7 +20,7 @@
         <activity android:name=".GameUI.HelpActivity" />
         <activity android:name=".GameUI.GameActivity" />
         <activity android:name=".GameUI.AboutActivity" />
-        <activity android:name=".GameUI.RecordsActivity"></activity>
+        <activity android:name=".GameUI.HighscoresActivity"></activity>
     </application>
 
 </manifest>
