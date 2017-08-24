@@ -12,13 +12,15 @@
         <activity android:name=".GameUI.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".GameUI.ChooseLvlActivity" />
         <activity android:name=".GameUI.HelpActivity" />
-        <activity android:name=".GameUI.GameActivity"></activity>
+        <activity android:name=".GameUI.GameActivity" />
+        <activity android:name=".GameUI.AboutActivity" />
+        <activity android:name=".GameUI.RecordsActivity"></activity>
     </application>
 
 </manifest>

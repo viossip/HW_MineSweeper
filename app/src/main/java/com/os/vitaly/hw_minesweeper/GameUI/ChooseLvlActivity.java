@@ -6,14 +6,20 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.os.vitaly.hw_minesweeper.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChooseLvlActivity extends AppCompatActivity {
 
-    ImageButton easyBtn, mediumBtn, hardBtn, backBtn;
+    //ImageButton easyBtn, mediumBtn, hardBtn, backBtn;
+    private List<ImageButton> buttonsInActivity;
+    private myClickListener listener;
 
     public enum Level {
         Easy("Easy"), Medium("Medium"), Hard("Hard");
@@ -27,33 +33,25 @@ public class ChooseLvlActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_lvl);
 
-        easyBtn = (ImageButton)findViewById(R.id.buttonEasy);
-        mediumBtn = (ImageButton)findViewById(R.id.buttonMedium);
-        hardBtn = (ImageButton)findViewById(R.id.buttonHard);
+        listener = new myClickListener();
+        buttonsInActivity = new ArrayList();
+        getAllButtons((ViewGroup) findViewById(android.R.id.content));
 
-        easyBtn.setOnClickListener(new myClickListener());
-        mediumBtn.setOnClickListener(new myClickListener());
-        hardBtn.setOnClickListener(new myClickListener());
-
-        easyBtn.setTag(Level.Easy);
-        mediumBtn.setTag(Level.Medium);
-        hardBtn.setTag(Level.Hard);
-
-        backBtn = (ImageButton)findViewById(R.id.buttonBack);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
+        if (buttonsInActivity.size() > 0 ){
+            for (ImageButton b : buttonsInActivity){
+                b.setOnClickListener(listener);
             }
-        });
+        }
     }
 
-    public void startGameActivity(int lvl){
-        Intent intent = new Intent(ChooseLvlActivity.this, GameActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putInt("level", lvl);
-        intent.putExtras(bundle);
-        startActivity(intent);
+    private void getAllButtons(ViewGroup v) {
+        for (int i = 0; i < v.getChildCount(); i++) {
+            View child = v.getChildAt(i);
+            if(child instanceof ViewGroup)
+                getAllButtons((ViewGroup)child);
+            else if(child instanceof ImageButton)
+                buttonsInActivity.add((ImageButton)child);
+        }
     }
 
     public class myClickListener implements View.OnClickListener {
@@ -63,9 +61,18 @@ public class ChooseLvlActivity extends AppCompatActivity {
             ImageButton thisButton = (ImageButton) v;
 
             thisButton.setScaleType(ImageButton.ScaleType.FIT_CENTER);
-            thisButton.setPadding(10, 10, 10, 10);
+            thisButton.setPadding(20, 20, 20, 20);
 
-            startGameActivity(((Level)thisButton.getTag()).ordinal());
+            if(v.getId() != R.id.buttonBack){
+                Intent intent = new Intent(ChooseLvlActivity.this, GameActivity.class);
+                Bundle bundle = new Bundle();
+
+                bundle.putInt("level", (Level.valueOf(thisButton.getTag().toString())).ordinal());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+            else
+                finish();
         }
     }
 }
