@@ -10,10 +10,14 @@ import com.os.vitaly.hw_minesweeper.R;
 
 public class GameActivity extends AppCompatActivity {
 
+    ChooseLvlActivity.Level lvl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        Bundle bundle = getIntent().getExtras();
+        lvl = ChooseLvlActivity.Level.values()[bundle.getInt("level")] ;
 
         ImageButton btnExit = (ImageButton) findViewById(R.id.btnExitGame);
         btnExit.setOnClickListener(new View.OnClickListener() {
