@@ -5,10 +5,10 @@ import android.view.View;
 
 import com.os.vitaly.hw_minesweeper.Controls.GameRunner;
 
-/**
- * Created by Vitaly on 24.08.2017.
- */
 
+/**
+ * Created by Marcell on 2016. 04. 14..
+ */
 public abstract class BaseCell extends View {
 
     private int value;

@@ -14,9 +14,9 @@ import com.os.vitaly.hw_minesweeper.Entities.Cell;
  * Created by ilya on 23/08/2017.
  */
 public class GameRunner {
-     static int HEIGHT;
-     static int WIDTH;
-     static int Bomb_Number;
+    public static int HEIGHT;
+    public static int WIDTH;
+    public static int Bomb_Number;
     private static GameRunner instance;
     private Context context;
 
@@ -42,7 +42,7 @@ public class GameRunner {
         // create the grid and store it
         int[][] GeneratedGrid = GameLogic.generator(Bomb_Number,WIDTH, HEIGHT);
         PrintGrid.print(GeneratedGrid,WIDTH,HEIGHT);
-        setGrid(context,GeneratedGrid,);
+        setGrid(context,GeneratedGrid);
 
     }
     private void setGrid( final Context context, final int[][] grid ){
@@ -53,8 +53,44 @@ public class GameRunner {
                     Minesweepers[x][y] = new Cell(context, x, y);
                 }
                 Minesweepers[x][y].setValue(grid[x][y]);
-                Minesweepers[x][y].invlidate
+                Minesweepers[x][y].invalidate();
             }
     }
+    public Cell getCellAt(int position,int x,int y,boolean ByPosition) {
+        if (ByPosition) {
+            int PosX = position % WIDTH;
+            int PosY = position / WIDTH;
+            return Minesweepers[PosX][PosY];
+        }
+        return Minesweepers[x][y];
     }
+
+    public void click( int x , int y ){
+        if( x >= 0 && y >= 0 && x < WIDTH && y < HEIGHT && !getCellAt(-1,x,y,false).isClicked() ){
+            getCellAt(-1,x,y,false).setClicked();
+
+            if( getCellAt(-1,x,y,false).getValue() == 0 ){
+                for( int xt = -1 ; xt <= 1 ; xt++ ){
+                    for( int yt = -1 ; yt <= 1 ; yt++){
+                        if( xt != yt ){
+                            click(x + xt , y + yt);
+                        }
+                    }
+                }
+            }
+
+            if( getCellAt(-1,x,y,false).isBomb() ){
+                onGameLost();
+            }
+        }
+
+        checkEnd();
+    }
+
+    private void onGameLost() {
+    }
+    private void checkEnd(){
+
+    }
+}
 
