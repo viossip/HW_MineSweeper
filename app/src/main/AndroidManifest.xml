@@ -20,7 +20,8 @@
         <activity android:name=".GameUI.HelpActivity" />
         <activity android:name=".GameUI.GameActivity" />
         <activity android:name=".GameUI.AboutActivity" />
-        <activity android:name=".GameUI.HighscoresActivity"></activity>
+        <activity android:name=".GameUI.HighscoresActivity" />
+        <activity android:name=".GameUI.OutcomeActivity"></activity>
     </application>
 
 </manifest>

@@ -11,4 +11,5 @@
     <string name="lbl_mines">Mines:</string>
     <string name="about_activity_text1">HomeWork 1 \n By Vitaly Osipenkov \n id:324716448 \n and \n Ilya Shtukmaister \n id:309550325</string>
     <string name="about_activity_title">About:</string>
+    <string name="outcome_activity_title">You are:</string>
 </resources>
