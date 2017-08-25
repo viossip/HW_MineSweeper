@@ -22,14 +22,14 @@ public class GameRunner {
     public static int HEIGHT=10;
     public static int WIDTH=10;
     public static int Bomb_Number=5;
+
     private static GameRunner instance;
     private Context context;
-    GameActivity gm= new GameActivity();
+
     private Cell[][] Minesweepers;
 
     public static GameRunner getInstance() {
         if (instance == null) {
-
             instance = new GameRunner();
         }
         return instance;
@@ -37,6 +37,26 @@ public class GameRunner {
 
     public GameRunner() {
 
+    }
+
+    public void setLevel(String lvl){
+        level = lvl;
+
+        if (level.equals("Easy")){
+            HEIGHT=10;
+            WIDTH=10;
+            Bomb_Number=5;
+        }
+        if (level.equals("Medium")) {
+            HEIGHT=10;
+            WIDTH=10;
+            Bomb_Number=10;
+        }
+        if (level.equals("Hard")) {
+            HEIGHT=5;
+            WIDTH=5;
+            Bomb_Number=10;
+        }
     }
 
 
@@ -52,24 +72,6 @@ public class GameRunner {
 
     }
 
-    private void createLogic(GameActivity gm) {
-        if (gm.getLevel().getValue().equals("Easy")){
-            HEIGHT=10;
-            WIDTH=10;
-            Bomb_Number=5;
-        }
-        if (gm.getLevel().getValue().equals("Medium")) {
-            HEIGHT=10;
-            WIDTH=10;
-            Bomb_Number=10;
-        }
-        if (gm.getLevel().getValue().equals("Hard")) {
-            HEIGHT=10;
-            WIDTH=10;
-            Bomb_Number=10;
-        }
-    }
-
     private void setGrid(final Context context, final int[][] grid) {
         Minesweepers = new Cell[WIDTH][HEIGHT];
         for (int x = 0; x < WIDTH; x++)
@@ -82,14 +84,6 @@ public class GameRunner {
             }
     }
 
-//    public Cell getCellAt(int position, int x, int y, boolean ByPosition) {
-//        if (ByPosition) {
-//            int PosX = position % WIDTH;
-//            int PosY = position / WIDTH;
-//            return Minesweepers[PosX][PosY];
-//        }
-//        return Minesweepers[x][y];
-//    }
 public Cell getCellAt(int position) {
     int x = position % WIDTH;
     int y = position / WIDTH;

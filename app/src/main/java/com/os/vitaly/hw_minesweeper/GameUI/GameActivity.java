@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.os.vitaly.hw_minesweeper.Controls.GameRunner;
-import com.os.vitaly.hw_minesweeper.Entities.Cell;
-import com.os.vitaly.hw_minesweeper.Entities.GridBoard;
 import com.os.vitaly.hw_minesweeper.R;
 
 public class GameActivity extends AppCompatActivity {
@@ -42,7 +40,10 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        GameRunner.getInstance().createGrid(this);
+       GameRunner gm = GameRunner.getInstance();
+        gm.createGrid(this);
+        gm.setLevel(lvl.getValue());
+
     }
     public ChooseLvlActivity.Level getLevel(){
         return lvl;
