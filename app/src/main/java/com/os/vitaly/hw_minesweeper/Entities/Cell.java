@@ -94,7 +94,7 @@ public class Cell extends BaseCell implements View.OnClickListener , View.OnLong
     }
 
     private void drawNormalBomb(Canvas canvas ){
-        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.zero);
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.mine);
         drawable.setBounds(0,0,getWidth(),getHeight());
         drawable.draw(canvas);
     }

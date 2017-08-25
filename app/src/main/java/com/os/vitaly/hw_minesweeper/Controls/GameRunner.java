@@ -1,16 +1,13 @@
 package com.os.vitaly.hw_minesweeper.Controls;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.os.vitaly.hw_minesweeper.Entities.Cell;
-import com.os.vitaly.hw_minesweeper.GameUI.ChooseLvlActivity;
 import com.os.vitaly.hw_minesweeper.GameUI.GameActivity;
-import com.os.vitaly.hw_minesweeper.GameUI.MainActivity;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 //import com.example.ilyavitaly.minesweeper.UI.Cell;
 
@@ -18,7 +15,13 @@ import com.os.vitaly.hw_minesweeper.GameUI.MainActivity;
  * Created by ilya on 23/08/2017.
  */
 public class GameRunner {
+    private int flagsCount = 0;
+    public static boolean TimerOn=true;
     public String level;
+
+    public int seconds = 0;
+    public int minutes = 0;
+    public Timer t;
 //    GameActivity gm= new GameActivity();
     public static int HEIGHT=10;
     public static int WIDTH=10;
@@ -28,6 +31,7 @@ public class GameRunner {
     private Context context;
 
     private Cell[][] Minesweepers;
+    private GameListener gameListener;
 
     public static GameRunner getInstance() {
         if (instance == null) {
@@ -37,7 +41,6 @@ public class GameRunner {
     }
 
     public GameRunner() {
-
     }
 
     public void setLevel(String lvl) {
@@ -61,6 +64,36 @@ public class GameRunner {
         }
     }
 
+    public void setGameListener(GameListener gameListener) {
+        this.gameListener = gameListener;
+    }
+
+    public void startTimer() {
+        t = new Timer();
+        //Set the schedule function and rate
+        t.scheduleAtFixedRate(new TimerTask() {
+
+            @Override
+            public void run() {
+                seconds += 1;
+                if (seconds == 60) {
+                    seconds = 0;
+                    minutes = minutes + 1;
+                }
+                gameListener.timeChanged();
+            }
+
+        }, 0, 1000);
+    }
+
+    public int getMinutes(){
+        return minutes;
+    }
+
+    public int getSeconds(){
+        return seconds;
+    }
+
 
     public void createGrid(Context context,boolean check) {
         setLevel(GameActivity.lvl.getValue());
@@ -72,9 +105,6 @@ public class GameRunner {
         setGrid(context, GeneratedGrid);
 
     }
-
-
-
 
     private void setGrid(final Context context, final int[][] grid) {
         Minesweepers = new Cell[WIDTH][HEIGHT];
@@ -137,6 +167,8 @@ public Cell getCellAt(int position) {
         }
 
         if (bombNotFound == 0 && notRevealed == 0) {
+            gameListener.onEndGame(true);
+            t.cancel();
 //            Toast.makeText(context, "Game won", Toast.LENGTH_SHORT).show();
         }
         return false;
@@ -146,14 +178,20 @@ public Cell getCellAt(int position) {
         boolean isFlagged = getCellAt( x, y).isFlagged();
         getCellAt( x, y).setFlagged(!isFlagged);
         getCellAt( x, y).invalidate();
+        gameListener.minesUpdated();
     }
 
     private void onGameLost() {
-
+        t.cancel();
+        gameListener.onEndGame(false);
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
                 getCellAt( x, y).setRevealed();
             }
         }
+    }
+
+    public int getMines() {
+        return Bomb_Number;
     }
 }
