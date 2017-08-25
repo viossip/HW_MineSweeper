@@ -22,7 +22,7 @@ public class GridBoard extends GridView {
     public GridBoard(Context context , AttributeSet attrs){
         super(context,attrs);
 
-        GameRunner.getInstance().createGrid(context);
+        GameRunner.getInstance().createGrid(context,false);
 
         setNumColumns(GameRunner.WIDTH);
         setAdapter(new GridAdapter());

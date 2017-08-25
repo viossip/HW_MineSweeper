@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.os.vitaly.hw_minesweeper.Entities.Cell;
 import com.os.vitaly.hw_minesweeper.GameUI.ChooseLvlActivity;
 import com.os.vitaly.hw_minesweeper.GameUI.GameActivity;
+import com.os.vitaly.hw_minesweeper.GameUI.MainActivity;
 
 //import com.example.ilyavitaly.minesweeper.UI.Cell;
 
@@ -17,8 +18,8 @@ import com.os.vitaly.hw_minesweeper.GameUI.GameActivity;
  * Created by ilya on 23/08/2017.
  */
 public class GameRunner {
-    String level;
-
+    public String level;
+//    GameActivity gm= new GameActivity();
     public static int HEIGHT=10;
     public static int WIDTH=10;
     public static int Bomb_Number=5;
@@ -39,29 +40,30 @@ public class GameRunner {
 
     }
 
-    public void setLevel(String lvl){
+    public void setLevel(String lvl) {
         level = lvl;
-
-        if (level.equals("Easy")){
-            HEIGHT=10;
-            WIDTH=10;
-            Bomb_Number=5;
-        }
-        if (level.equals("Medium")) {
-            HEIGHT=10;
-            WIDTH=10;
-            Bomb_Number=10;
-        }
-        if (level.equals("Hard")) {
-            HEIGHT=5;
-            WIDTH=5;
-            Bomb_Number=10;
+        if (level != null) {
+            if (level.equals("Easy")) {
+                HEIGHT = 10;
+                WIDTH = 10;
+                Bomb_Number = 5;
+            }
+            if (level.equals("Medium")) {
+                HEIGHT = 10;
+                WIDTH = 10;
+                Bomb_Number = 10;
+            }
+            if (level.equals("Hard")) {
+                HEIGHT = 5;
+                WIDTH = 5;
+                Bomb_Number = 10;
+            }
         }
     }
 
 
-    public void createGrid(Context context) {
-//        createLogic(gm);
+    public void createGrid(Context context,boolean check) {
+        setLevel(GameActivity.lvl.getValue());
         this.context = context;
 
         // create the grid and store it
@@ -70,6 +72,9 @@ public class GameRunner {
         setGrid(context, GeneratedGrid);
 
     }
+
+
+
 
     private void setGrid(final Context context, final int[][] grid) {
         Minesweepers = new Cell[WIDTH][HEIGHT];
@@ -93,6 +98,7 @@ public Cell getCellAt(int position) {
     public Cell getCellAt( int x , int y ){
         return Minesweepers[x][y];
     }
+
     public void click(int x, int y) {
         if (x >= 0 && y >= 0 && x < WIDTH && y < HEIGHT && !getCellAt( x, y).isClicked()) {
             getCellAt( x, y).setClicked();
