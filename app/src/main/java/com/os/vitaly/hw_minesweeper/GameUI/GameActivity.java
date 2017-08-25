@@ -20,8 +20,8 @@ public class GameActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         lvl = ChooseLvlActivity.Level.values()[bundle.getInt("level")] ;
 
-        GridBoard gb = (GridBoard)findViewById(R.id.gridBoard );
-        gb.sttLevel(lvl);
+       // GridBoard gb = (GridBoard)findViewById(R.id.gridBoard );
+        //gb.setLevel(lvl);
 
         ImageButton btnExit = (ImageButton) findViewById(R.id.btnExitGame);
         btnExit.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +41,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
-        GameRunner.getInstance(lvl).createGrid(this);
+        GameRunner.getInstance().createGrid(this);
     }
     public ChooseLvlActivity.Level getLevel(){
         return lvl;

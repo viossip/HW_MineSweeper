@@ -25,16 +25,15 @@ public class GameRunner {
 
     private Cell[][] Minesweepers;
 
-    public static GameRunner getInstance(ChooseLvlActivity.Level lvl) {
+    public static GameRunner getInstance() {
         if (instance == null) {
-
-            instance = new GameRunner(lvl.getValue());
+            instance = new GameRunner();
         }
         return instance;
     }
 
-    public GameRunner(String value) {
-        if (value.equals("Easy")){
+    public GameRunner() {
+        /*if (value.equals("Easy")){
             this.HEIGHT=10;
             this.WIDTH=10;
             this.Bomb_Number=5;
@@ -48,10 +47,11 @@ public class GameRunner {
             this.HEIGHT=10;
             this.WIDTH=10;
             this.Bomb_Number=10;
-        }
+        }*/
+        this.HEIGHT=10;
+        this.WIDTH=10;
+        this.Bomb_Number=5;
     }
-
-
 
     public void createGrid(Context context) {
         this.context = context;

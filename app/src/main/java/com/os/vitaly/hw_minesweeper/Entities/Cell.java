@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.os.vitaly.hw_minesweeper.Controls.GameRunner;
+import com.os.vitaly.hw_minesweeper.GameUI.ChooseLvlActivity;
 import com.os.vitaly.hw_minesweeper.R;
 
 /**
@@ -32,12 +33,12 @@ public class Cell extends BaseCell implements View.OnClickListener , View.OnLong
 
     @Override
     public void onClick(View v) {
-        GameRunner.getInstance(lvl).click( getXPos(), getYPos() );
+        GameRunner.getInstance().click( getXPos(), getYPos() );
     }
 
     @Override
     public boolean onLongClick(View v) {
-        GameRunner.getInstance(lvl).flag( getXPos() , getYPos() );
+        GameRunner.getInstance().flag( getXPos() , getYPos() );
 
         return true;
     }
