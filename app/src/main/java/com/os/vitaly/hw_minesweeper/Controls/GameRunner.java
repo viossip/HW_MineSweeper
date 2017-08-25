@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.os.vitaly.hw_minesweeper.Entities.Cell;
 import com.os.vitaly.hw_minesweeper.GameUI.ChooseLvlActivity;
+import com.os.vitaly.hw_minesweeper.GameUI.GameActivity;
 
 //import com.example.ilyavitaly.minesweeper.UI.Cell;
 
@@ -22,38 +23,25 @@ public class GameRunner {
     public static int Bomb_Number;
     private static GameRunner instance;
     private Context context;
-
+    GameActivity gm= new GameActivity();
     private Cell[][] Minesweepers;
 
-    public static GameRunner getInstance(ChooseLvlActivity.Level lvl) {
+    public static GameRunner getInstance() {
         if (instance == null) {
 
-            instance = new GameRunner(lvl.getValue());
+            instance = new GameRunner();
         }
         return instance;
     }
 
-    public GameRunner(String value) {
-        if (value.equals("Easy")){
-            this.HEIGHT=10;
-            this.WIDTH=10;
-            this.Bomb_Number=5;
-        }
-        if (value.equals("Medium")) {
-            this.HEIGHT=10;
-            this.WIDTH=10;
-            this.Bomb_Number=10;
-        }
-        if (value.equals("Hard")) {
-            this.HEIGHT=10;
-            this.WIDTH=10;
-            this.Bomb_Number=10;
-        }
+    public GameRunner() {
+
     }
 
 
 
     public void createGrid(Context context) {
+        createLogic(gm);
         this.context = context;
 
         // create the grid and store it
@@ -61,6 +49,24 @@ public class GameRunner {
         PrintGrid.print(GeneratedGrid, WIDTH, HEIGHT);
         setGrid(context, GeneratedGrid);
 
+    }
+
+    private void createLogic(GameActivity gm) {
+        if (gm.getLevel().getValue().equals("Easy")){
+            HEIGHT=10;
+            WIDTH=10;
+            Bomb_Number=5;
+        }
+        if (gm.getLevel().getValue().equals("Medium")) {
+            HEIGHT=10;
+            WIDTH=10;
+            Bomb_Number=10;
+        }
+        if (gm.getLevel().getValue().equals("Hard")) {
+            HEIGHT=10;
+            WIDTH=10;
+            Bomb_Number=10;
+        }
     }
 
     private void setGrid(final Context context, final int[][] grid) {
@@ -122,7 +128,7 @@ public class GameRunner {
         }
 
         if (bombNotFound == 0 && notRevealed == 0) {
-            Toast.makeText(context, "Game won", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "Game won", Toast.LENGTH_SHORT).show();
         }
         return false;
     }
@@ -134,8 +140,6 @@ public class GameRunner {
     }
 
     private void onGameLost() {
-        // handle lost game
-        Toast.makeText(context, "Game lost", Toast.LENGTH_SHORT).show();
 
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
