@@ -134,11 +134,11 @@
 
 
     </LinearLayout>
+
     <com.os.vitaly.hw_minesweeper.Entities.GridBoard
-        android:id="@+id/gridBoard"
+        android:id="@+id/GridBoard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_centerHorizontal="true" />
 
 </LinearLayout>
