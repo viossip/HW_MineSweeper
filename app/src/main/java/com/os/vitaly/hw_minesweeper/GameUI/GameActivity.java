@@ -19,9 +19,6 @@ public class GameActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         lvl = ChooseLvlActivity.Level.values()[bundle.getInt("level")] ;
 
-
-
-
         ImageButton btnExit = (ImageButton) findViewById(R.id.btnExitGame);
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,8 +38,9 @@ public class GameActivity extends AppCompatActivity {
         });
 
        GameRunner gm = GameRunner.getInstance();
-        gm.createGrid(this);
         gm.setLevel(lvl.getValue());
+        gm.createGrid(this);
+
 
     }
     public ChooseLvlActivity.Level getLevel(){

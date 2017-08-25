@@ -60,7 +60,6 @@ public class GameRunner {
     }
 
 
-
     public void createGrid(Context context) {
 //        createLogic(gm);
         this.context = context;
