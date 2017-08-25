@@ -9,6 +9,8 @@ import android.view.View;
 
 import com.os.vitaly.hw_minesweeper.Controls.GameRunner;
 import com.os.vitaly.hw_minesweeper.GameUI.ChooseLvlActivity;
+import com.os.vitaly.hw_minesweeper.GameUI.GameActivity;
+import com.os.vitaly.hw_minesweeper.GameUI.MainActivity;
 import com.os.vitaly.hw_minesweeper.R;
 
 /**
@@ -16,7 +18,8 @@ import com.os.vitaly.hw_minesweeper.R;
  */
 
 public class Cell extends BaseCell implements View.OnClickListener , View.OnLongClickListener{
-
+//    ChooseLvlActivity.Level lvl;
+    GameActivity gm= new GameActivity();
     public Cell(Context context , int x , int y ){
         super(context);
 
@@ -26,6 +29,11 @@ public class Cell extends BaseCell implements View.OnClickListener , View.OnLong
         setOnLongClickListener(this);
     }
 
+
+
+//    public void setLevel(ChooseLvlActivity.Level lvl){
+//        this.lvl = lvl;
+//    }
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, widthMeasureSpec);
