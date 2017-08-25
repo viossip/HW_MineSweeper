@@ -18,19 +18,14 @@ import com.os.vitaly.hw_minesweeper.GameUI.MainActivity;
 
 public class GridBoard extends GridView {
 
-    ChooseLvlActivity.Level lvl;
 
     public GridBoard(Context context , AttributeSet attrs){
         super(context,attrs);
 
-        GameRunner.getInstance(lvl).createGrid(context);
+        GameRunner.getInstance().createGrid(context);
 
         setNumColumns(GameRunner.WIDTH);
         setAdapter(new GridAdapter());
-    }
-
-    public void sttLevel(ChooseLvlActivity.Level lvl){
-        this.lvl = lvl;
     }
 
 
@@ -39,11 +34,11 @@ public class GridBoard extends GridView {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
-    private class GridAdapter extends BaseAdapter {
+    private class GridAdapter extends BaseAdapter{
 
         @Override
         public int getCount() {
-            return GameRunner.getInstance(lvl).WIDTH * GameRunner.getInstance(lvl).HEIGHT;
+            return GameRunner.getInstance().WIDTH * GameRunner.getInstance().HEIGHT;
         }
 
         @Override
@@ -58,7 +53,7 @@ public class GridBoard extends GridView {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            return GameRunner.getInstance(lvl).getCellAt(position,-1,-1,true);
+            return GameRunner.getInstance().getCellAt(position);
         }
     }
 }

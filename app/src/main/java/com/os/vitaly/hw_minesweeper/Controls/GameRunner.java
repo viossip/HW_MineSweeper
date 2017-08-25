@@ -18,9 +18,10 @@ import com.os.vitaly.hw_minesweeper.GameUI.GameActivity;
  */
 public class GameRunner {
     String level;
-    public static int HEIGHT;
-    public static int WIDTH;
-    public static int Bomb_Number;
+
+    public static int HEIGHT=10;
+    public static int WIDTH=10;
+    public static int Bomb_Number=5;
     private static GameRunner instance;
     private Context context;
     GameActivity gm= new GameActivity();
@@ -41,7 +42,7 @@ public class GameRunner {
 
 
     public void createGrid(Context context) {
-        createLogic(gm);
+//        createLogic(gm);
         this.context = context;
 
         // create the grid and store it
@@ -81,20 +82,29 @@ public class GameRunner {
             }
     }
 
-    public Cell getCellAt(int position, int x, int y, boolean ByPosition) {
-        if (ByPosition) {
-            int PosX = position % WIDTH;
-            int PosY = position / WIDTH;
-            return Minesweepers[PosX][PosY];
-        }
+//    public Cell getCellAt(int position, int x, int y, boolean ByPosition) {
+//        if (ByPosition) {
+//            int PosX = position % WIDTH;
+//            int PosY = position / WIDTH;
+//            return Minesweepers[PosX][PosY];
+//        }
+//        return Minesweepers[x][y];
+//    }
+public Cell getCellAt(int position) {
+    int x = position % WIDTH;
+    int y = position / WIDTH;
+
+    return Minesweepers[x][y];
+}
+
+    public Cell getCellAt( int x , int y ){
         return Minesweepers[x][y];
     }
-
     public void click(int x, int y) {
-        if (x >= 0 && y >= 0 && x < WIDTH && y < HEIGHT && !getCellAt(-1, x, y, false).isClicked()) {
-            getCellAt(-1, x, y, false).setClicked();
+        if (x >= 0 && y >= 0 && x < WIDTH && y < HEIGHT && !getCellAt( x, y).isClicked()) {
+            getCellAt( x, y).setClicked();
 
-            if (getCellAt(-1, x, y, false).getValue() == 0) {
+            if (getCellAt( x, y).getValue() == 0) {
                 for (int xt = -1; xt <= 1; xt++) {
                     for (int yt = -1; yt <= 1; yt++) {
                         if (xt != yt) {
@@ -104,7 +114,7 @@ public class GameRunner {
                 }
             }
 
-            if (getCellAt(-1, x, y, false).isBomb()) {
+            if (getCellAt( x, y).isBomb()) {
                 onGameLost();
             }
         }
@@ -117,11 +127,11 @@ public class GameRunner {
         int notRevealed = WIDTH * HEIGHT;
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
-                if (getCellAt(-1,x, y,false).isRevealed() || getCellAt(-1,x, y,false).isFlagged()) {
+                if (getCellAt( x, y).isRevealed() || getCellAt( x, y).isFlagged()) {
                     notRevealed--;
                 }
 
-                if (getCellAt(-1,x, y,false).isFlagged() && getCellAt(-1,x, y,false).isBomb()) {
+                if (getCellAt( x, y).isFlagged() && getCellAt( x, y).isBomb()) {
                     bombNotFound--;
                 }
             }
@@ -134,16 +144,16 @@ public class GameRunner {
     }
 
     public void flag(int x, int y) {
-        boolean isFlagged = getCellAt(-1,x, y,false).isFlagged();
-        getCellAt(-1,x, y,false).setFlagged(!isFlagged);
-        getCellAt(-1,x, y,false).invalidate();
+        boolean isFlagged = getCellAt( x, y).isFlagged();
+        getCellAt( x, y).setFlagged(!isFlagged);
+        getCellAt( x, y).invalidate();
     }
 
     private void onGameLost() {
 
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
-                getCellAt(-1,x, y,false).setRevealed();
+                getCellAt( x, y).setRevealed();
             }
         }
     }
