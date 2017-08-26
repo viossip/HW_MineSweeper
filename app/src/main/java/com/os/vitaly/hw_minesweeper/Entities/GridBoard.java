@@ -8,9 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 
 import com.os.vitaly.hw_minesweeper.Controls.GameRunner;
-import com.os.vitaly.hw_minesweeper.GameUI.ChooseLvlActivity;
-import com.os.vitaly.hw_minesweeper.GameUI.GameActivity;
-import com.os.vitaly.hw_minesweeper.GameUI.MainActivity;
 
 /**
  * Created by ilya on 24/08/2017.

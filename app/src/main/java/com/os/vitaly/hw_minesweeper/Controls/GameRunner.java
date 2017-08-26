@@ -1,7 +1,6 @@
 package com.os.vitaly.hw_minesweeper.Controls;
 
 import android.content.Context;
-import android.widget.TextView;
 
 import com.os.vitaly.hw_minesweeper.Entities.Cell;
 import com.os.vitaly.hw_minesweeper.GameUI.GameActivity;
@@ -26,6 +25,7 @@ public class GameRunner {
     public static int HEIGHT=10;
     public static int WIDTH=10;
     public static int Bomb_Number=5;
+    int flagCount;
 
     private static GameRunner instance;
     private Context context;
@@ -101,7 +101,7 @@ public class GameRunner {
 
         // create the grid and store it
         int[][] GeneratedGrid = GameLogic.generator(Bomb_Number, WIDTH, HEIGHT);
-        PrintGrid.print(GeneratedGrid, WIDTH, HEIGHT);
+
         setGrid(context, GeneratedGrid);
 
     }
@@ -168,7 +168,9 @@ public Cell getCellAt(int position) {
 
         if (bombNotFound == 0 && notRevealed == 0) {
             gameListener.onEndGame(true);
-            t.cancel();
+            timerReset();
+
+
 //            Toast.makeText(context, "Game won", Toast.LENGTH_SHORT).show();
         }
         return false;
@@ -176,14 +178,22 @@ public Cell getCellAt(int position) {
 
     public void flag(int x, int y) {
         boolean isFlagged = getCellAt( x, y).isFlagged();
-        getCellAt( x, y).setFlagged(!isFlagged);
+        if (isFlagged)
+            flagCount--;
+        if (Bomb_Number-flagCount>0){
+            getCellAt( x, y).setFlagged(!isFlagged);
+
+        }
+        if (!isFlagged&& Bomb_Number-flagCount>0)
+            flagCount++;
         getCellAt( x, y).invalidate();
         gameListener.minesUpdated();
+
     }
 
     private void onGameLost() {
-        t.cancel();
         gameListener.onEndGame(false);
+        timerReset();
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
                 getCellAt( x, y).setRevealed();
@@ -191,7 +201,15 @@ public Cell getCellAt(int position) {
         }
     }
 
+    public void timerReset() {
+        t.cancel();
+        minutes=0;
+        seconds=0;
+        flagCount=0;
+    }
+
     public int getMines() {
-        return Bomb_Number;
+
+        return Bomb_Number-flagCount;
     }
 }

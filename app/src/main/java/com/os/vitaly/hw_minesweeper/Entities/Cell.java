@@ -8,9 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.os.vitaly.hw_minesweeper.Controls.GameRunner;
-import com.os.vitaly.hw_minesweeper.GameUI.ChooseLvlActivity;
 import com.os.vitaly.hw_minesweeper.GameUI.GameActivity;
-import com.os.vitaly.hw_minesweeper.GameUI.MainActivity;
 import com.os.vitaly.hw_minesweeper.R;
 
 /**
