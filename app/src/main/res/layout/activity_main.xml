@@ -45,7 +45,7 @@
             android:id="@+id/buttonRecords"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@drawable/button_records"
+            android:src="@drawable/button_highscores"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:padding="0dp"

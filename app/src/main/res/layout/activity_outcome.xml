@@ -50,13 +50,9 @@
         android:src="@drawable/button_ok" />
 
     <ImageView
-        android:id="@+id/logo"
+        android:id="@+id/outcome_animation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/logo" />
+        android:layout_gravity="center"/>
 
 </LinearLayout>

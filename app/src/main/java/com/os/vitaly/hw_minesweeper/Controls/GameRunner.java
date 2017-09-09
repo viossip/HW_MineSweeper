@@ -170,7 +170,6 @@ public Cell getCellAt(int position) {
             gameListener.onEndGame(true);
             timerReset();
 
-
 //            Toast.makeText(context, "Game won", Toast.LENGTH_SHORT).show();
         }
         return false;
