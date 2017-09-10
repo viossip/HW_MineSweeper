@@ -61,7 +61,6 @@ public abstract class BaseCell extends View {
     public void setClicked() {
         this.isClicked = true;
         this.isRevealed = true;
-
         invalidate();
     }
 
@@ -88,9 +87,7 @@ public abstract class BaseCell extends View {
     public void setPosition( int x , int y ){
         this.x = x;
         this.y = y;
-
         this.position = y * GameRunner.WIDTH + x;
-
         invalidate();
     }
 

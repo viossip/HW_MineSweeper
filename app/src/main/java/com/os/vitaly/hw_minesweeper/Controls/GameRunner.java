@@ -176,18 +176,16 @@ public Cell getCellAt(int position) {
     }
 
     public void flag(int x, int y) {
-        boolean isFlagged = getCellAt( x, y).isFlagged();
+        boolean isFlagged = getCellAt(x, y).isFlagged();
         if (isFlagged)
             flagCount--;
-        if (Bomb_Number-flagCount>0){
-            getCellAt( x, y).setFlagged(!isFlagged);
-
+        if (Bomb_Number - flagCount > 0) {
+            getCellAt(x, y).setFlagged(!isFlagged);
         }
-        if (!isFlagged&& Bomb_Number-flagCount>0)
+        if (!isFlagged && Bomb_Number - flagCount > 0)
             flagCount++;
-        getCellAt( x, y).invalidate();
+        getCellAt(x, y).invalidate();
         gameListener.minesUpdated();
-
     }
 
     private void onGameLost() {

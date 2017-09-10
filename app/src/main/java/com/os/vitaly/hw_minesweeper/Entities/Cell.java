@@ -27,11 +27,6 @@ public class Cell extends BaseCell implements View.OnClickListener , View.OnLong
         setOnLongClickListener(this);
     }
 
-
-
-//    public void setLevel(ChooseLvlActivity.Level lvl){
-//        this.lvl = lvl;
-//    }
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, widthMeasureSpec);
@@ -44,19 +39,17 @@ public class Cell extends BaseCell implements View.OnClickListener , View.OnLong
 
     @Override
     public boolean onLongClick(View v) {
-        GameRunner.getInstance().flag( getXPos() , getYPos() );
-
+        if (!isRevealed())
+            GameRunner.getInstance().flag( getXPos() , getYPos() );
         return true;
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.d("Minesweeper" , "Cell::onDraw");
         drawButton(canvas);
 
-        if( isFlagged() ){
+        if( isFlagged() && !isClicked()){
             drawFlag(canvas);
         }else if( isRevealed() && isBomb() && !isClicked() ){
             drawNormalBomb(canvas);

@@ -1,6 +1,5 @@
 package com.os.vitaly.hw_minesweeper.GameUI;
 
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
@@ -121,22 +120,16 @@ public class GameActivity extends AppCompatActivity implements GameListener {
     @Override
     public void onEndGame(boolean isWin) {
         gameResultList= new int [3];
-        //Intent intent = new Intent(GameActivity.this, OutcomeActivity.class);
-
-        //Bundle bundle = new Bundle();
         gameResultList[1]=gm.getMinutes();
         gameResultList[2]=gm.getSeconds();
         if(isWin) {
             gameResultList[0]=1;
-            //bundle.putIntArray("isWin", gameResultList);
         }else {
             gameResultList[0]=0;
-            //bundle.putIntArray("isWin", gameResultList);
-            for (int i =0 ; i<10; i++)
-                for(int j = 0; j<10;j++)
+            for (int i =0 ; i<gm.HEIGHT; i++)
+                for(int j = 0; j<gm.WIDTH;j++)
                     animateBoard(gm.getCellAt(i,j), ANIMATION_DURATION);
         }
-        //intent.putExtras(bundle);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -147,7 +140,7 @@ public class GameActivity extends AppCompatActivity implements GameListener {
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
-        }, 2000);
+        }, 1500);
 
         //startActivity(intent);
     }
