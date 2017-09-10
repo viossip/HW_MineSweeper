@@ -12,13 +12,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.os.vitaly.hw_minesweeper.Controls.GameListener;
+import com.os.vitaly.hw_minesweeper.Controls.ServiceListener;
 import com.os.vitaly.hw_minesweeper.R;
 
 /**
  * Created by ilya on 09/09/2017.
  */
 
-public class mapActivity extends Fragment implements OnMapReadyCallback {
+public class mapActivity extends Fragment implements OnMapReadyCallback , ServiceListener{
 
     GoogleMap mGoogleMap;
     MapView mMapView;
@@ -45,6 +47,15 @@ public class mapActivity extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
+        mGoogleMap =googleMap;
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+
+    }
+
+
+    @Override
+    public void GpsUpdate(int xLocation, int yLocation) {
 
     }
 }

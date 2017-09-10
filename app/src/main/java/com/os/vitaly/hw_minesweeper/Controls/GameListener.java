@@ -8,4 +8,5 @@ public interface GameListener {
     void timeChanged();
     void onEndGame(boolean isWin);
     void minesUpdated();
+
 }

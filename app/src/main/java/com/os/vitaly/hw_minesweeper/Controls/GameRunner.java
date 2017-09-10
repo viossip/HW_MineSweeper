@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.os.vitaly.hw_minesweeper.Entities.Cell;
 import com.os.vitaly.hw_minesweeper.GameUI.GameActivity;
+import com.os.vitaly.hw_minesweeper.Services.GpsLocation;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -26,13 +27,13 @@ public class GameRunner {
     public static int WIDTH=10;
     public static int Bomb_Number=5;
     int flagCount;
-
+    private GpsLocation gpsLocation;
     private static GameRunner instance;
     private Context context;
 
     private Cell[][] Minesweepers;
     private GameListener gameListener;
-
+    private ServiceListener serviceListener;
     public static GameRunner getInstance() {
         if (instance == null) {
             instance = new GameRunner();
@@ -67,6 +68,7 @@ public class GameRunner {
     public void setGameListener(GameListener gameListener) {
         this.gameListener = gameListener;
     }
+    public void setServiceListener(ServiceListener serviceListener){this.serviceListener=serviceListener;}
 
     public void startTimer() {
         t = new Timer();
@@ -167,6 +169,9 @@ public Cell getCellAt(int position) {
         }
 
         if (bombNotFound == 0 && notRevealed == 0) {
+            gpsLocation= new GpsLocation();
+            gpsLocation.getIsGPSTrackingEnabled();
+
             gameListener.onEndGame(true);
             timerReset();
 
