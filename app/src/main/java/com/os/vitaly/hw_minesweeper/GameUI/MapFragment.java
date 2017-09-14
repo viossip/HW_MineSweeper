@@ -18,7 +18,7 @@ import com.os.vitaly.hw_minesweeper.R;
  * Created by ilya on 09/09/2017.
  */
 
-public class mapActivity extends Fragment implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     GoogleMap mGoogleMap;
     MapView mMapView;
