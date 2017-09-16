@@ -171,7 +171,8 @@ public Cell getCellAt(int position) {
         if (bombNotFound == 0 && notRevealed == 0) {
             gpsLocation= new GpsLocation();
             gpsLocation.getIsGPSTrackingEnabled();
-
+            
+            serviceListener.GpsUpdate(gpsLocation.getLatitude(),gpsLocation.getLongitude());
             gameListener.onEndGame(true);
             timerReset();
 

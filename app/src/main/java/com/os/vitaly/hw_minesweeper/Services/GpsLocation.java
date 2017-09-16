@@ -30,11 +30,11 @@ import java.util.Locale;
  * Created by ilya on 10/09/2017.
  */
 
-public class GpsLocation extends Service implements LocationListener,ServiceListener {
+public class GpsLocation extends Service implements LocationListener {
     // Get Class Name
     private static String TAG = GpsLocation.class.getName();
 
-    private final Context mContext;
+
 
     // flag for GPS Status
     boolean isGPSEnabled = false;
@@ -75,7 +75,7 @@ public class GpsLocation extends Service implements LocationListener,ServiceList
     public void getLocation() {
 
         try {
-            locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
+            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
             //getting GPS status
             isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -337,8 +337,6 @@ public class GpsLocation extends Service implements LocationListener,ServiceList
         return null;
     }
 
-    @Override
-    public void GpsUpdate(int xLocation, int yLocation) {
 
-    }
+
 }
