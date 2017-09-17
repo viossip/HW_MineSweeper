@@ -23,7 +23,7 @@ public class AccelerometerService extends Service implements SensorEventListener
     }
 
     public interface AccelerometerListener {
-        void onAccelerometerSensorEvent(float[] values);
+        void onAccelerometerSensorEvent(SensorEvent event);
     }
 
     public void setListener(AccelerometerListener listener) {
@@ -34,7 +34,7 @@ public class AccelerometerService extends Service implements SensorEventListener
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             if (listener != null)
-                listener.onAccelerometerSensorEvent(event.values);
+                listener.onAccelerometerSensorEvent(event);
         }
     }
 

@@ -1,5 +1,8 @@
 package com.os.vitaly.hw_minesweeper.Controls;
 
+import android.graphics.Point;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -7,11 +10,16 @@ import java.util.Random;
  */
 
 public class GameLogic {
+
+    public static ArrayList<Point> positions = new ArrayList<Point>();
+    public static  int grid[][];
+    public static Random r;
+
     public static int[][] generator( int bomb , final int width , final int height){
 
-        Random r = new Random();
+        r = new Random();
 
-        int [][] grid = new int[width][height];
+        grid = new int[width][height];
         for( int x = 0 ; x< width ;x++ ){
             grid[x] = new int[height];
         }
@@ -27,9 +35,58 @@ public class GameLogic {
             }
         }
         grid = calculateNeigbours(grid,width,height);
-
+        ////////////////////////////////////////////
+        savePositionsWithoutMines(grid, grid.length,grid[0].length);
+        ///////////////////////////////////////////
         return grid;
     }
+
+    public static int [][] addMine()
+    {
+        if (positions.size() > 0 ) {
+            r = new Random();
+            int pos = r.nextInt(positions.size());
+            grid[positions.get(pos).x][positions.get(pos).y] = -1;
+            grid = calculateNeigbours(grid, grid.length, grid[0].length);
+            positions.remove(pos);
+        }
+        else
+        {
+            //Lose
+        }
+        return  grid;
+    }
+
+    private static void savePositionsWithoutMines(int[][] grid, int width, int height) {
+
+        for (int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++) {
+                if (grid[x][y] != -1) {
+                    positions.add(new Point(x,y));
+                }
+            }
+    }
+
+
+
+    /*public static int[][] addMines(int [][] grid, int numOfMines){
+
+        Random r = new Random();
+
+        for (int i =0; i<numOfMines; i++){
+
+            int x = r.nextInt(grid.length);
+            int y = r.nextInt(grid[0].length);
+
+            while (grid[x][y] == -1){
+                x = r.nextInt(grid.length);
+                y = r.nextInt(grid[0].length);
+            }
+            grid[x][y] = -1;
+        }
+        grid = calculateNeigbours(grid,grid.length,grid[0].length);
+        return grid;
+    }*/
 
     private static int[][] calculateNeigbours( int[][] grid , final int width , final int height){
         for( int x = 0 ; x < width ; x++){

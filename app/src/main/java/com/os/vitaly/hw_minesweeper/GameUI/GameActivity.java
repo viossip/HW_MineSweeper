@@ -205,7 +205,7 @@ public class GameActivity extends AppCompatActivity implements GameListener {
     private void setAccelerometerService(AccelerometerService accelerometerService) {
         if (accelerometerService != null) {
             this.accelerometerService = accelerometerService;
-            AccelerometerHandler motionHandler = new AccelerometerHandler(accelerometerService, gm);
+            AccelerometerHandler motionHandler = new AccelerometerHandler(accelerometerService, gm, this);
             Thread accelerometerThread = new Thread(motionHandler);
             accelerometerThread.start();
             accelerometerService.setListener(motionHandler);

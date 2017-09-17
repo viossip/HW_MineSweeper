@@ -16,8 +16,7 @@ import com.os.vitaly.hw_minesweeper.R;
  */
 
 public class Cell extends BaseCell implements View.OnClickListener , View.OnLongClickListener{
-//    ChooseLvlActivity.Level lvl;
-    GameActivity gm= new GameActivity();
+
     public Cell(Context context , int x , int y ){
         super(context);
 
