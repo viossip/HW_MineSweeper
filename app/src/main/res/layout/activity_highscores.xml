@@ -75,9 +75,9 @@
         <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content" />-->
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/frame_container"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="220dp" />
 
     <ImageButton

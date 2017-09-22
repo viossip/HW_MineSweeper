@@ -65,7 +65,7 @@ public class OutcomeActivity extends AppCompatActivity {
                         ActivityCompat.requestPermissions(OutcomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                     }
                     else{
-                        // Toast.makeText(mcontext,"You need have granted permission",Toast.LENGTH_SHORT).show();
+
                         gps = new GpsLocation(mcontext, OutcomeActivity.this);
                         if (gps.canGetLocation()) {
                             latitude = gps.getLatitude();
@@ -88,13 +88,19 @@ public class OutcomeActivity extends AppCompatActivity {
 
 
 
-                        //go to result screen
+
                     }
 
-                    //insert to db
 
 
 
+
+
+                }else{
+                    Intent intent = new Intent(OutcomeActivity.this,MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
 
                 }
 

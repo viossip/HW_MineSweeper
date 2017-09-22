@@ -9,19 +9,24 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import com.os.vitaly.hw_minesweeper.R;
 
 public class HighscoresActivity extends AppCompatActivity {
-    private Intent intent;
-    Fragment mapFragment;
+
+
+
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscores);
 
-        ImageButton returnButton = (ImageButton)findViewById(R.id.btnReturn);
+         FragmentManager fragmentManager = getFragmentManager();
+         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+         ListFragment lf = new ListFragment();
+         fragmentTransaction.add(R.id.frame_container,lf);
+         fragmentTransaction.commit();
+         ImageButton returnButton = (ImageButton)findViewById(R.id.btnReturn);
         returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,34 +40,31 @@ public class HighscoresActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                MapFragment f2 = new MapFragment();
-                fragmentTransaction.add(R.id.frame_container,f2);
-                fragmentTransaction.commit();
+                getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.frame_container)).commit();
 
+                MapFragment mf= new MapFragment();
+                fragmentTransaction.add(R.id.frame_container,mf);
+                fragmentTransaction.commit();
             }
         });
 
+         ImageButton tableButton = (ImageButton)findViewById(R.id.btnTable);
+         tableButton.setOnClickListener(new View.OnClickListener(){
+             @Override
+             public void onClick(View view) {
 
-//        ImageButton mapButton = (ImageButton) findViewById(R.id.btnMap);
-//
-//        mapButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //LinearLayout fragContainer = (LinearLayout) findViewById(R.id.fragment_place_holder);
-//
-//                LinearLayout ll = new LinearLayout(HighscoresActivity.this);
-//                ll.setOrientation(LinearLayout.HORIZONTAL);
-//
-//                //MapFragment mapFragment = new MapFragment();
-//                //getFragmentManager().beginTransaction().replace(R.id.fragment_place_holder, mapFragment).commit();
-//                //fragContainer.addView(ll);
-//
-//                /*final FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                MapFragment mapFragment = new MapFragment();
-//                transaction.replace(R.id.fragment_place_holder, mapFragment);
-//                transaction.commit();*/
-//            }
-//        });
+                 FragmentManager fragmentManager = getFragmentManager();
+                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                 getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById(R.id.frame_container)).commit();
+                 ListFragment lf = new ListFragment();
+                 fragmentTransaction.add(R.id.frame_container,lf);
+                 fragmentTransaction.commit();
+             }
+         } );
+
+
 
     }
+
+
 }

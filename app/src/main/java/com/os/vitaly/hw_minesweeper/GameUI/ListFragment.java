@@ -33,9 +33,9 @@ public class ListFragment extends Fragment{
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.list_fragment, container, false);
-        ListView mlistView = (ListView)view.findViewById(R.id.List_view);
+        ListView myListView = (ListView)view.findViewById(R.id.List_view);
         Cursor res = MainActivity.currentDB.getAllData();
-        if (res.getCount() == 0) // no data for us
+        if (res.getCount() == 0)
         {
             // show message
 
@@ -54,15 +54,15 @@ public class ListFragment extends Fragment{
             }
 
 
-            //show all data
+
 
         }
 
-//        tableAdapter = new TableAdapter(getActivity(),R.layout.adapter_view_layout,users);
-//        mlistView.setAdapter(adapter);
+        TableAdapter tableAdapter = new TableAdapter(getActivity(),R.layout.table_adapter,users);
+        myListView.setAdapter(tableAdapter);
 
 
-        // Inflate the layout for this fragment
+
         return view;
     }
 }

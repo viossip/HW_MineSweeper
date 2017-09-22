@@ -27,7 +27,7 @@ public class ClientsDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (user_name varchar(20), lng TEXT , lat TEXT, time int)");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (user_name varchar(20), lng TEXT , lat TEXT, time int)");//the time is in seconds
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ClientsDB extends SQLiteOpenHelper {
         contentValues.put(LNG_COL, longitude);
         contentValues.put(LAT_COL, latitue);
         long result = db.insert(TABLE_NAME,null,contentValues);
-        if (result == -1)
+        if (result == -1)// check if the insert to db is ok or not
             return false;
         return true;
 

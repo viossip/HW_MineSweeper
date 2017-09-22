@@ -20,12 +20,12 @@ import com.os.vitaly.hw_minesweeper.Controls.AccelerometerHandler;
 import com.os.vitaly.hw_minesweeper.Controls.AccelerometerService;
 import com.os.vitaly.hw_minesweeper.Controls.GameListener;
 import com.os.vitaly.hw_minesweeper.Controls.GameRunner;
-import com.os.vitaly.hw_minesweeper.Controls.ServiceListener;
+
 import com.os.vitaly.hw_minesweeper.R;
 
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity implements GameListener ,ServiceListener{
+public class GameActivity extends AppCompatActivity implements GameListener {
 
     private static final int ANIMATION_DURATION = 1200;
     public static ChooseLvlActivity.Level lvl;
@@ -226,8 +226,5 @@ public class GameActivity extends AppCompatActivity implements GameListener ,Ser
         super.onResume();
     }
 
-    @Override
-    public void GpsUpdate() {
 
-    }
 }

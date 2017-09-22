@@ -60,14 +60,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             mMapView.getMapAsync(this);
 
 
-//
-//            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
-//                    != PackageManager.PERMISSION_GRANTED
-//                    && ActivityCompat.checkSelfPermission(getActivity(),
-//                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                return;
-//            }
-//           mGoogleMap.setMyLocationEnabled(true);
         }
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -75,7 +67,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
         mGoogleMap =googleMap;
-//        LatLng location = new LatLng(gpsTracker.getLatitude(),gpsTracker.getLongitude());
+
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         Cursor res = MainActivity.currentDB.getAllData();
@@ -96,25 +88,24 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 int time = res.getInt(3);
 
 
-                // googleMap.addMarker(new MarkerOptions().position(new LatLng(32.089442, 34.8190357)).title("eli kelev").snippet("eli kelev2"));
+
                 googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title(name).snippet("Time: " + time + " Seconds"));
 
                 if (counter == 0)
                 {
-                    CameraPosition HighScorePostion = CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(16).bearing(0).tilt(45).build();
-                    googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(HighScorePostion));
+                    CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
+                    CameraPosition scorePos = CameraPosition.builder().target(new LatLng(latitude, longitude)).zoom(15).bearing(0).tilt(45).build();
+                    googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(scorePos));
+                    googleMap.animateCamera(zoom);
                 }
                 counter++;
             }
 
 
-            //show all data
+
 
         }
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLng(location));
-//        googleMap.addMarker(new MarkerOptions().position(location));
-        googleMap.animateCamera(zoom);
+
 
     }
 

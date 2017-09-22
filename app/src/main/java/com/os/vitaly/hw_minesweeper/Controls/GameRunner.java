@@ -33,7 +33,7 @@ public class GameRunner {
     private Cell[][] Minesweepers;
     private int[][] logicGrid;
     private GameListener gameListener;
-    private ServiceListener serviceListener;
+
     public static GameRunner getInstance() {
         if (instance == null) {
             instance = new GameRunner();
@@ -68,7 +68,7 @@ public class GameRunner {
     public void setGameListener(GameListener gameListener) {
         this.gameListener = gameListener;
     }
-    public void setServiceListener(ServiceListener serviceListener){this.serviceListener=serviceListener;}
+
 
     public void startTimer() {
         t = new Timer();
