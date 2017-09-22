@@ -24,7 +24,18 @@
         android:textColor="@android:color/black"
         android:textSize="20pt"
         android:textStyle="bold" />
-
+    <TextView
+        android:id="@+id/nameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:text="Enter your name :"
+        android:textColor="@android:color/black"
+        android:textSize="20pt"
+        android:textStyle="bold"
+        android:visibility="invisible" />
     <EditText
         android:id="@+id/nameEdit"
         android:layout_width="match_parent"
@@ -33,7 +44,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="30dp"
         android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
+        android:background="@android:color/white"
         android:scaleType="fitCenter"
         android:visibility="invisible" />
 

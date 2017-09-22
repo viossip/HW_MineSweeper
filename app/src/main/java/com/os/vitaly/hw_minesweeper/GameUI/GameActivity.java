@@ -1,9 +1,13 @@
 package com.os.vitaly.hw_minesweeper.GameUI;
 
 import android.animation.ObjectAnimator;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -12,21 +16,37 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.os.vitaly.hw_minesweeper.Controls.AccelerometerHandler;
+import com.os.vitaly.hw_minesweeper.Controls.AccelerometerService;
 import com.os.vitaly.hw_minesweeper.Controls.GameListener;
 import com.os.vitaly.hw_minesweeper.Controls.GameRunner;
+import com.os.vitaly.hw_minesweeper.Controls.ServiceListener;
 import com.os.vitaly.hw_minesweeper.R;
 
 import java.util.Random;
 
-public class GameActivity extends AppCompatActivity implements GameListener {
-    private static final int ANIMATION_DURATION = 3400;
+public class GameActivity extends AppCompatActivity implements GameListener ,ServiceListener{
+
+    private static final int ANIMATION_DURATION = 1200;
     public static ChooseLvlActivity.Level lvl;
     public TextView timeText;
     public  TextView minesNumber;
     public GameRunner gm;
     private DisplayMetrics metrics;
     private int[] gameResultList;
+    private AccelerometerService accelerometerService;
 
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder binder) {
+            if (binder instanceof AccelerometerService.AccelerometerServiceBinder)
+                setAccelerometerService(((AccelerometerService.AccelerometerServiceBinder) binder).getService());
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +73,6 @@ public class GameActivity extends AppCompatActivity implements GameListener {
             }
         });
 
-//        ImageButton btnStartNewGame = (ImageButton) findViewById(R.id.btnStartNewGame);
-//        btnStartNewGame.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                restart();
-//            }
-//        });
-
         gm = GameRunner.getInstance();
         gm.setLevel(lvl.getValue());
         gm.createGrid(this, true);
@@ -77,6 +89,22 @@ public class GameActivity extends AppCompatActivity implements GameListener {
                 restart();
             }
         });
+
+        startAccelerometerService();
+    }
+
+    private void startAccelerometerService() {
+        bindService(new Intent(GameActivity.this, AccelerometerService.class), serviceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    private void startListeningToAccelerometer() {
+        if (accelerometerService != null)
+            accelerometerService.startListening();
+    }
+
+    private void stopListeningToAccelerometer() {
+        if (accelerometerService != null)
+            accelerometerService.stopListening();
     }
 
     public void onBackPressed() {
@@ -140,9 +168,7 @@ public class GameActivity extends AppCompatActivity implements GameListener {
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
-        }, 1500);
-
-        //startActivity(intent);
+        }, ANIMATION_DURATION);
     }
 
     @Override
@@ -176,5 +202,32 @@ public class GameActivity extends AppCompatActivity implements GameListener {
         rotate.start();
         moveVertical.start();
         moveHorizantal.start();
+    }
+
+    private void setAccelerometerService(AccelerometerService accelerometerService) {
+        if (accelerometerService != null) {
+            this.accelerometerService = accelerometerService;
+            AccelerometerHandler motionHandler = new AccelerometerHandler(accelerometerService, gm);
+            Thread accelerometerThread = new Thread(motionHandler);
+            accelerometerThread.start();
+            accelerometerService.setListener(motionHandler);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        stopListeningToAccelerometer();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        startListeningToAccelerometer();
+        super.onResume();
+    }
+
+    @Override
+    public void GpsUpdate() {
+
     }
 }

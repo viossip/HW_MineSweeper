@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
 
+import com.os.vitaly.hw_minesweeper.Entities.ClientsDB;
 import com.os.vitaly.hw_minesweeper.R;
 
 import java.util.ArrayList;
@@ -19,14 +20,14 @@ public class MainActivity extends AppCompatActivity {
     private Intent intent;
     private myClickListener listener;
     private List<ImageButton> buttonsInActivity;
-
+    public static ClientsDB currentDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+        currentDB = new ClientsDB(this);
         listener = new myClickListener();
         buttonsInActivity = new ArrayList();
         getAllButtons((ViewGroup) findViewById(android.R.id.content));

@@ -5,5 +5,5 @@ package com.os.vitaly.hw_minesweeper.Controls;
  */
 
 public interface ServiceListener {
-    void GpsUpdate(double xLocation, double yLocation);
+    void GpsUpdate();
 }

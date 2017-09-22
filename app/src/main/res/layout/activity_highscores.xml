@@ -68,13 +68,17 @@
             android:paddingHorizontal="10px"
             android:scaleType="fitCenter"
             android:src="@drawable/button_map" />
-    </LinearLayout>
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stretchColumns="1">
-    </TableLayout>
+    </LinearLayout>
+    <!--<fragment-->
+        <!--android:id="@+id/map"-->
+        <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="wrap_content"
+        android:layout_height="220dp" />
 
     <ImageButton
         android:id="@+id/btnReturn"
