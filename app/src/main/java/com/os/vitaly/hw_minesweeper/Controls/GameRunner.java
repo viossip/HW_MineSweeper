@@ -22,7 +22,6 @@ public class GameRunner {
     public int seconds = 0;
     public int minutes = 0;
     public Timer t;
-//    GameActivity gm= new GameActivity();
     public static int HEIGHT=10;
     public static int WIDTH=10;
     public static int Bomb_Number=5;
@@ -32,6 +31,7 @@ public class GameRunner {
     private Context context;
 
     private Cell[][] Minesweepers;
+    private int[][] logicGrid;
     private GameListener gameListener;
     private ServiceListener serviceListener;
     public static GameRunner getInstance() {
@@ -102,10 +102,19 @@ public class GameRunner {
         this.context = context;
 
         // create the grid and store it
-        int[][] GeneratedGrid = GameLogic.generator(Bomb_Number, WIDTH, HEIGHT);
+        logicGrid = GameLogic.generator(Bomb_Number, WIDTH, HEIGHT);
 
-        setGrid(context, GeneratedGrid);
+        setGrid(context, logicGrid);
+    }
 
+    public void updateMines() {
+        //this.context = context;
+
+        // add mines to grid
+        logicGrid = GameLogic.addMine();
+        updateGrid(context, logicGrid);
+        Bomb_Number++;
+        gameListener.minesUpdated();
     }
 
     private void setGrid(final Context context, final int[][] grid) {
@@ -119,6 +128,25 @@ public class GameRunner {
                 Minesweepers[x][y].invalidate();
             }
     }
+    public void updateGrid(Context context, final int[][] grid) {
+        for (int x = 0; x < grid.length; x++) {
+            for (int y = 0; y < grid[0].length; y++) {
+                if (Minesweepers[x][y] == null) {
+                    Minesweepers[x][y] = new Cell(context, x, y);
+                    Minesweepers[x][y].invalidate();
+                }
+                if (Minesweepers[x][y].getValue() != grid[x][y]) {
+
+                    Minesweepers[x][y].setValue(grid[x][y]);
+                    Minesweepers[x][y].setUnRevealed();
+                    Minesweepers[x][y].invalidate();
+                } else {
+                    Minesweepers[x][y].setValue(grid[x][y]);
+                }
+            }
+        }
+    }
+
 
 public Cell getCellAt(int position) {
     int x = position % WIDTH;
@@ -209,7 +237,6 @@ public Cell getCellAt(int position) {
     }
 
     public int getMines() {
-
         return Bomb_Number-flagCount;
     }
 }
